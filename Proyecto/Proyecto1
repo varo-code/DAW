@@ -1,0 +1,96 @@
+Trabajo 1º trimestre, Servidores web
+
+Instalar Apache, ejecutamos los siguientes comandos para instalar Apache
+
+	sudo apt update
+	sudo apt install apache2
+
+Iniciar y habilitar Apache, iniciamos el servidor
+
+	sudo systemctl start apache2
+	sudo systemctl enable apache2
+	sudo systemctl reload apache2
+
+Configurar el archivo
+Editamos el archivo para añadir los dominios
+
+	sudo nano /etc/hosts
+	127.0.0.1 centro.intranet
+	127.0.0.1 departamentos.centro.intranet
+
+Crear un usuario y otorgar permisos
+Accedemos a sql a MySQL
+
+	sudo mysql
+	CREATE USER 'ad_user'@'localhost' IDENTIFIED BY 'contrasena';
+	GRANT ALL PRIVILEGES ON wordpress.* TO 'ad_user'@'localhost';
+	FLUSH PRIVILEGES;
+	EXIT;
+
+Crear la base de datos
+
+
+Accede a MySQL nuevamente:
+Como olvidamos crear la base de datos, accedemos nuevamente a MySQL
+sudo mysql -u root -p
+#añadimos la contraseña
+
+
+Crea una base de datos para WordPress:
+
+CREATE DATABASE wordpress_db;
+
+
+Otorga privilegios al usuario ad_user en esta base de datos:
+
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'ad_user'@'localhost';
+FLUSH PRIVILEGES;
+
+Sal de MySQL:
+
+EXIT;
+
+Instalar WordPress
+
+Descargo WordPress y descomprime el archivo
+
+	wget https://wordpress.org/latest.tar.gz
+	tar -xvzf latest.tar.gz
+	sudo mv wordpress /var/www/centro.intranet
+
+Configuro los permisos correctos:
+
+	sudo chown -R www-data:www-data /var/www/centro.intranet
+	sudo chmod -R 755 /var/www/centro.intrane
+
+
+Configurar Apache para el dominio de WordPress
+
+Crea el archivo de configuración para centro.intranet
+
+	sudo nano /etc/apache2/sites-available/centro.intranet.conf
+
+
+Añade el siguiente contenido dentro del archivo:
+	<VirtualHost *:80>
+	    ServerName centro.intranet
+	    DocumentRoot /var/www/centro.intranet
+
+	    <Directory /var/www/centro.intranet>
+	        AllowOverride All
+	        Require all granted
+	    </Directory>
+	</VirtualHost>
+
+Habilita el sitio y el módulo rewrite:
+Ejecuta los siguientes comandos
+
+	sudo a2ensite centro.intranet.conf
+	sudo a2enmod rewrite
+	sudo systemctl reload apache2
+
+Al no tener la ip publica busco la ip publica de la máquina
+
+	curl http://checkip.amazonaws.com 
+
+3.93.144.51
