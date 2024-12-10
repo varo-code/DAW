@@ -6,11 +6,11 @@ Instalar Apache, ejecutamos los siguientes comandos para instalar Apache
 	sudo apt install apache2
 
 Iniciar y habilitar Apache, iniciamos el servidor
-
+```BASH
 	sudo systemctl start apache2
 	sudo systemctl enable apache2
 	sudo systemctl reload apache2
-
+```
 Configurar el archivo
 Editamos el archivo para añadir los dominios
 
