@@ -1,96 +1,154 @@
-Trabajo 1º trimestre, Servidores web
+Configurando los dominios, agregando los dominios de epartamentos.centro.intranet y centro.intranet
 
-Instalar Apache, ejecutamos los siguientes comandos para instalar Apache
+	sudo mkdir /var/www/html/centro.intranet
 
-	sudo apt update
+Para hacer el sudo nos pide la contraseña para loguearse como superusuario
+
+Foto 1
+
+	sudo mkdir /var/www/html/departamentos.centro.intranet
+
+Foto 2
+
+
+
+
+
+
+APACHE
+
+Instalamos el servidor web apache. 
+
 	sudo apt install apache2
 
-Iniciar y habilitar Apache, iniciamos el servidor
+Foto 3
 
-	sudo systemctl start apache2
-	sudo systemctl enable apache2
-	sudo systemctl reload apache2
+Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en python
 
-Configurar el archivo
-Editamos el archivo para añadir los dominios
+Para instalar Wordpress primero necesitamos instalar php, con el siguiente comando instalamos php y sus extensiones
 
-	sudo nano /etc/hosts
-	127.0.0.1 centro.intranet
-	127.0.0.1 departamentos.centro.intranet
+	sudo apt install php libapache2-mod-php php-mysql \
+	php-curl php-gd php-xml php-mbstring php-zip php-soap php-intl -y
+	sudo apt install mysql-server -y
 
-Crear un usuario y otorgar permisos
-Accedemos a sql a MySQL
+Foto 4
+
+creamos un archivo php dentro de una carpeta 
+
+	nano /var/www/html/centro.intranet/index.php
+
+Foto 5
+
+Ahora instalamos mysql 
+
+	sudo apt install mysql-server
+
+Foto 6
+
+Deténemos el servicio de MySQL
+
+	sudo service mysql stop
+
+Foto 9
+
+Me conecto a MySQL sin contraseña
+
+	mysql -u root
+
+Foto 10
+
+
+Accedemos a la configuración de mysql con
 
 	sudo mysql
-	CREATE USER 'ad_user'@'localhost' IDENTIFIED BY 'contrasena';
-	GRANT ALL PRIVILEGES ON wordpress.* TO 'ad_user'@'localhost';
-	FLUSH PRIVILEGES;
-	EXIT;
+Foto 7
 
-Crear la base de datos
+Establecemos la contraseña para el usuario root, que será 'Hola123%
 
+	alter user root '@' localhost identified with mysql_native_password by 'Hola123%'
 
-Accede a MySQL nuevamente:
-Como olvidamos crear la base de datos, accedemos nuevamente a MySQL
-sudo mysql -u root -p
-#añadimos la contraseña
+Foto 8
 
+Creamos una base de datos
 
-Crea una base de datos para WordPress:
+	Create database ProyecTri Default Character set utf8 COLLATE  utf8_unicode_ci;
 
-CREATE DATABASE wordpress_db;
+Foto 11
 
+Creamos un usuario para que pueda usar la base de datos
 
-Otorga privilegios al usuario ad_user en esta base de datos:
+	Grant all ON ProyecTri.* to ‘Usuario’@’localhost’ identified by 'Hola123%'
 
-GRANT ALL PRIVILEGES ON wordpress_db.* TO 'ad_user'@'localhost';
-FLUSH PRIVILEGES;
-
-Sal de MySQL:
-
-EXIT;
-
-Instalar WordPress
-
-Descargo WordPress y descomprime el archivo
-
-	wget https://wordpress.org/latest.tar.gz
-	tar -xvzf latest.tar.gz
-	sudo mv wordpress /var/www/centro.intranet
-
-Configuro los permisos correctos:
-
-	sudo chown -R www-data:www-data /var/www/centro.intranet
-	sudo chmod -R 755 /var/www/centro.intrane
+Foto 12
 
 
-Configurar Apache para el dominio de WordPress
+Salimos de la base
 
-Crea el archivo de configuración para centro.intranet
+	mysql> exit
 
-	sudo nano /etc/apache2/sites-available/centro.intranet.conf
+Foto 13
 
+Añadimos estas líneas en:
 
-Añade el siguiente contenido dentro del archivo:
-	<VirtualHost *:80>
-	    ServerName centro.intranet
-	    DocumentRoot /var/www/centro.intranet
+	sudo cp /etc/apache2/sities-available/000-default.conf /etc/apache2/sities-available/WordPress.conf
 
-	    <Directory /var/www/centro.intranet>
-	        AllowOverride All
-	        Require all granted
-	    </Directory>
-	</VirtualHost>
+Foto 14
 
-Habilita el sitio y el módulo rewrite:
-Ejecuta los siguientes comandos
+	<Directory /var/www/html/centro.intranet>
+		AllowOverride All
+	</Directory>
 
-	sudo a2ensite centro.intranet.conf
+Foto 17
+
+Activamos el módulo rewrite y reiniciamos apache 
+
 	sudo a2enmod rewrite
-	sudo systemctl reload apache2
 
-Al no tener la ip publica busco la ip publica de la máquina
+Foto 15
 
-	curl http://checkip.amazonaws.com 
+Modificamos el archivo de configuración de apache
+	
+	sudo nano /etc/apache2/apache2.conf
 
-3.93.144.51
+Foto 16
+
+Preguntamos la ip
+
+	ip a
+
+Foto 18
+
+Instalamos WordPress con wget
+
+	wget https://wordpress.org/latest.zip
+
+Foto 19
+
+Movemos zip que se ha descargado a la carpeta /etc/www/html 
+
+	sudo mv latest.zip /var/www/html
+
+Foto 20
+
+Nos movemos al archivo
+
+	cd /var/www/html/
+
+Vemos si hemos movido todo bien
+
+	ls
+Foto 21
+
+Tras comprobar que está ahí lo vamos a descomprimir
+
+	sudo unzip latest.zip
+
+Foto 22
+
+Movemos todo lo de la carpeta "wordpress" a la carpeta
+
+	sudo mv -f wordpress/* centro.intranet/
+
+Ahora  para acceder introducimos la IP/centro.intranet
+
+Foto 23
