@@ -9,6 +9,8 @@ Para hacer el sudo nos pide la contraseña para loguearse como superusuario
 	sudo mkdir /var/www/html/departamentos.centro.intranet
 
 <h6>Foto 2</h6>
+![Foto 2](/Proyecto/FotosDeComands/ParteApache/Foto2.png)
+![Captura de pantalla 2024-12-17 102803](https://github.com/user-attachments/assets/2c46159e-df7b-4287-a51d-fd255f81fbcc)
 
 <h2>APACHE</h2>
 
