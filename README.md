@@ -202,3 +202,103 @@ Ahora  para acceder introducimos la IP/centro.intranet
 ![Foto 23](/Proyecto/FotosDeComands/ParteApache/Foto23.png)
 
 <h6>Foto 23</h6>
+
+<br><br>
+
+<h2>PYTHON</h2>
+
+
+Activamos el ‘wsgi’
+
+	sudo apt-get install libapache2-mod-wsgi-py3
+
+![Foto 1](/Proyecto/FotosDeComands/PartePython/Foto1.png)
+
+<h6>Foto 1</h6>
+
+Creamos las carpetas necesarias para la estructura de python
+
+	sudo mkdir /var/www/html/departamentos.centro.intranet/appython
+	sudo mkdir /var/www/html/departamentos.centro.intranet/appython/logs
+	sudo mkdir /var/www/html/departamentos.centro.intranet/public-html
+
+ ![Foto 2](/Proyecto/FotosDeComands/PartePython/Foto2.png)
+
+<h6>Foto 2</h6>
+
+Creamos un archivo dentro de aptpython que será el controlador añadiendole lo escrito en el comando y entramos dentro de la carpeta:
+
+	cd /var/www/html
+
+<h6>Foto 3</h6>
+
+	sudo su
+
+<h6>Foto 4</h6>
+<h6>Estan separado porque erre de comando y puse “sdo su” pero lo arregle</h6>
+
+Creamos el archivo del controlador
+	
+ 	sudo nano /var/www/html/departamentos.centro.intranet/appython/app.py
+  
+<h6>Foto 6</h6>
+
+Dentro del archivo añadimos
+
+	def application(environ, start_response):
+	    output = "<p>Hola</p>"
+	    start_response('200 OK', [('Content-Type', 'text/html; charset=utf-8')])
+	    return [output.encode('utf-8')]
+
+Hacemos ctrl+O (guardar), enter ( confirmar) y ctrl+X (salir del editor)
+
+<h6>Foto 5</h6>
+     
+Editamos un nuevo archivo en la ruta especificada, le añadimos lo que se ve en el archivo
+	  
+    sudo nano /etc/apache2/sites-available/python-web.conf
+
+<h6>Foto 7</h6>
+
+Añadimos dentro del archivo:
+
+<h6>Foto 8</h6>
+
+Hacemos ctrl+O (guardar), enter ( confirmar) y ctrl+X (salir del editor)
+
+
+
+Me aseguro los permisos
+
+	sudo chmod 755 /var/www/html/departamentos.centro.intranet/appython/app.py
+
+<h6>Foto 9</h6>
+
+Activamos el sitio web 
+
+    sudo a2ensite python-web
+
+
+<h6>Foto 10</h6>
+    
+Reiniciamos apache	
+
+sudo a2ensite python-web
+systemctl reload apache2
+
+
+<h6>Foto 11</h6>
+
+
+Editamos el hosts y le añadimoslas direcciones
+
+	sudo nano /etc/hosts
+
+<h6>Foto 13</h6>
+<h6>Foto 12</h6>
+
+Creamos el script de python que será lo que se verá en la web
+
+	sudo nano /var/www/html/departamentos.centro.intranet/public_html/index.py
+
+<h6>Foto 14</h6>
