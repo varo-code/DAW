@@ -229,18 +229,22 @@ Creamos las carpetas necesarias para la estructura de python
 Creamos un archivo dentro de aptpython que será el controlador añadiendole lo escrito en el comando y entramos dentro de la carpeta:
 
 	cd /var/www/html
-
+ ![Foto 3](/Proyecto/FotosDeComands/PartePython/Foto3.png)
 <h6>Foto 3</h6>
 
 	sudo su
 
+![Foto 4](/Proyecto/FotosDeComands/PartePython/Foto4.png)
+
 <h6>Foto 4</h6>
+
 <h6>Estan separado porque erre de comando y puse “sdo su” pero lo arregle</h6>
 
 Creamos el archivo del controlador
 	
  	sudo nano /var/www/html/departamentos.centro.intranet/appython/app.py
   
+![Foto 6](/Proyecto/FotosDeComands/PartePython/Foto6.png)
 <h6>Foto 6</h6>
 
 Dentro del archivo añadimos
@@ -252,40 +256,49 @@ Dentro del archivo añadimos
 
 Hacemos ctrl+O (guardar), enter ( confirmar) y ctrl+X (salir del editor)
 
+ ![Foto 5](/Proyecto/FotosDeComands/PartePython/Foto5.png)
+ 
 <h6>Foto 5</h6>
      
 Editamos un nuevo archivo en la ruta especificada, le añadimos lo que se ve en el archivo
 	  
     sudo nano /etc/apache2/sites-available/python-web.conf
 
+![Foto 7](/Proyecto/FotosDeComands/PartePython/Foto7.png)
+
 <h6>Foto 7</h6>
 
 Añadimos dentro del archivo:
 
+![Foto 8](/Proyecto/FotosDeComands/PartePython/Foto8.png)
+ 
 <h6>Foto 8</h6>
 
 Hacemos ctrl+O (guardar), enter ( confirmar) y ctrl+X (salir del editor)
-
 
 
 Me aseguro los permisos
 
 	sudo chmod 755 /var/www/html/departamentos.centro.intranet/appython/app.py
 
+![Foto 9](/Proyecto/FotosDeComands/PartePython/Foto9.png)
+ 
 <h6>Foto 9</h6>
 
 Activamos el sitio web 
 
     sudo a2ensite python-web
 
+![Foto 10](/Proyecto/FotosDeComands/PartePython/Foto10.png)
 
 <h6>Foto 10</h6>
     
 Reiniciamos apache	
 
-sudo a2ensite python-web
-systemctl reload apache2
+	sudo a2ensite python-web
+	systemctl reload apache2
 
+![Foto 11](/Proyecto/FotosDeComands/PartePython/Foto11.png)
 
 <h6>Foto 11</h6>
 
@@ -294,11 +307,18 @@ Editamos el hosts y le añadimoslas direcciones
 
 	sudo nano /etc/hosts
 
+![Foto 13](/Proyecto/FotosDeComands/PartePython/Foto13.png)
+
 <h6>Foto 13</h6>
+
+![Foto 12](/Proyecto/FotosDeComands/PartePython/Foto12.png)
+
 <h6>Foto 12</h6>
 
 Creamos el script de python que será lo que se verá en la web
 
 	sudo nano /var/www/html/departamentos.centro.intranet/public_html/index.py
+
+![Foto 14](/Proyecto/FotosDeComands/PartePython/Foto14.png)
 
 <h6>Foto 14</h6>
