@@ -1,4 +1,7 @@
+<h1>Proyecto de Álvaro Delcán Pérez</h1>
+<br><br>
 Configurando los dominios, agregando los dominios de epartamentos.centro.intranet y centro.intranet
+
 
 	sudo mkdir /var/www/html/centro.intranet
 
@@ -14,8 +17,11 @@ Para hacer el sudo nos pide la contraseña para loguearse como superusuario
 
 <h6>Foto 2</h6>
 
+<br><br>
 
 <h2>APACHE</h2>
+
+<br><br>
 
 Instalamos el servidor web apache. 
 
