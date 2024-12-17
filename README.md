@@ -1,20 +1,3 @@
-TEngo que hacer esto :  
-
-Vamos a instalar un servidor web interno para un servidor linux.
- Se Pide: Instalación del servidor web apache. Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en python Activar los módulos necesarios para ejecutar php y acceder a mysql Instala y configura wordpress Activar el módulo “wsgi” para permitir la ejecución de aplicaciones Python Crea y despliega una pequeña aplicación python para comprobar que funciona correctamente. Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación Instala y configura awstat. Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
-
-A la finalización del trabajo se procederá a una exposición de la presentación
-
-Enlaces de interés
-https://uniwebsidad.com/libros/python/capitulo-13/python-bajo-apache
-
-
-Instrucciones de entrega
-Se creará un repositorio en Github en el que se documentarán los pasos llevados a cabo para la realización de cada una de las actividades contempladas. La documentación debe incluir fragmentos de código empleados, además de imágenes que muestren la pantalla de la máquina virtual durante el proceso.
-En enlace de dicho repositorio se incluirá en el repositorio del módulo, especificando claramente que se trata de la práctica de servidores web.
-
-Y esto es lo que llevó:
-
 Configurando los dominios, agregando los dominios de epartamentos.centro.intranet y centro.intranet
 
 sudo mkdir /var/www/html/centro.intranet
@@ -73,7 +56,7 @@ Me conecto a MySQL sin contraseña
 
 Foto 10
 
-b
+
 Accedemos a la configuración de mysql con
 
 	sudo mysql
@@ -108,29 +91,42 @@ Añadimos estas líneas en:
 
 	sudo cp /etc/apache2/sities-available/000-default.conf /etc/apache2/sities-available/WordPress.conf
 
+Foto 14
+
 <Directory /var/www/html/centro.intranet>
 	AllowOverride All
 </Directory>
+
+Foto 17
 
 Activamos el módulo rewrite y reiniciamos apache 
 
 sudo a2enmod rewrite
 
+Foto 15
+
 Modificamos el archivo de configuración de apache
 	
 	sudo nano /etc/apache2/apache2.conf
+
+Foto 16
 
 Preguntamos la ip
 
 ip a
 
+Foto 18
 Instalamos WordPress con wget
 
 wget https://wordpress.org/latest.zip
 
+Foto 19
+
 Movemos zip que se ha descargado a la carpeta /etc/www/html 
 
 sudo mv latest.zip /var/www/html
+
+Foto 20
 
 Nos movemos al archivo
 
@@ -139,17 +135,20 @@ cd /var/www/html/
 Vemos si hemos movido todo bien
 
 	ls
+Foto 21
 
 Tras comprobar que está ahí lo vamos a descomprimir
 
 sudo unzip latest.zip
+
+Foto 22
 
 Movemos todo lo de la carpeta "wordpress" a la carpeta
 
 sudo mv -f wordpress/* centro.intranet/
 
 Ahora  para acceder introducimos la IP/centro.intranet
-
+Foto 23
 
 PYTHON
 
@@ -192,17 +191,3 @@ Editamos el archivo hosts y le añadimos ambas direcciones
 Creamos un script de python que será lo que se verá en la web
 
 	sudo nano /var/www/html/departamentos.centro.intranet/public_html/index.py
-
-
-
-
-
-
-
-
-
-
-
-
-
-F
