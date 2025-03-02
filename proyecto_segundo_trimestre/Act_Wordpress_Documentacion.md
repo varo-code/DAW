@@ -4,7 +4,7 @@
 
 <ul>Lo Primero que vamos ha hacer dentro de nuestro labotario en AWS Buscar la opción de VPC.</ul>
 
-![Foto 1](/imagen_trabajo/foto_1.png)
+![Foto 1](imagen_trabajo/foto_1.png)
 
 <ul>Una vez dentro hacemos click sobre el boton de "<b>Crear VPC</b>".</ul>
 
