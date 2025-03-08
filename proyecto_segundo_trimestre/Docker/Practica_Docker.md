@@ -71,3 +71,40 @@ Para ver los contenedores en nuestro sistema, incluyendo los detenidos, usamos:
 
 ![Foto 9](Docker_ADP/foto_9.png)
 
+Lleva a cabo la práctica descrita en el segundo artículo
+
+Edita el fichero Dockerfile
+
+Para crear el fichero primero tenemos que bajarnos el código de la aplicación con la que vamos a trabajar el Dockerfile. Para ello clonamos el repositorio con el que trabajaremos de la siguiente manera:
+
+    sudo git clone https://github.com/docker/getting-started-app.git
+
+![Foto 10](Docker_ADP/foto_10.png)
+
+Verificamos el contenido del repositorio clonado:
+
+    ls getting-started-app/
+
+![Foto 11](Docker_ADP/foto_11.png)
+
+
+Nos ubicamos dentro de la carpeta clonada y creamos el archivo Dockerfile:
+
+    cd getting-started-app
+    sudo nano Dockerfile
+
+![Foto 12](Docker_ADP/foto_12.png)
+
+Añadimos el siguiente contenido:
+
+    # syntax=docker/dockerfile:1
+    FROM node:lts-alpine
+    WORKDIR /app
+    COPY . .
+    RUN yarn install --production
+    CMD ["node", "src/index.js"]
+    EXPOSE 3000
+
+![Foto 13](Docker_ADP/foto_13.png)
+
+
