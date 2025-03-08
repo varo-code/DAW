@@ -1,3 +1,5 @@
+<h1>Actividad 1</h1>
+
 <h1>Instalación de Docker en Ubuntu</h1>
 
 El primer paso es eliminar cualquier versión anterior de Docker. Como estamos trabajando en una máquina recién creada, es probable que no haya ninguna instalación previa, pero ejecutamos el siguiente comando para asegurarnos:
@@ -40,6 +42,8 @@ El servicio de Docker se inicia automáticamente después de la instalación y s
 
 
 Con esto, Docker está correctamente instalado en Ubuntu.
+
+<h1>Actividad 2</h1>
 
 <h2>Pruebas iniciales con Docker</h2>
 
