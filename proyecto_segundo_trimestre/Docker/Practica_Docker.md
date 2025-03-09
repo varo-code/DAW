@@ -107,4 +107,54 @@ Añadimos el siguiente contenido:
 
 ![Foto 13](Docker_ADP/foto_13.png)
 
+Construcción del contenedor
+
+Ejecutamos el siguiente comando para construir la imagen a partir del Dockerfile
+
+    sudo docker build -t getting-started .
+
+![Foto 14](Docker_ADP/foto_14.png)
+
+Ejecución del contenedor
+
+sudo docker run -d -p 127.0.0.1:3000:3000 getting-started
+
+
+Podemos ver ejecutando el comando bien a y el contenedor que está funcionando en la dirección 127.0.0.1:3000:
+
+![Foto 15](Docker_ADP/foto_15.png)
+
+Create una cuenta en hub.docker.com
+
+Accederemos a la página docker.com y nos hacemos una cuenta: 
+
+![Foto 16](Docker_ADP/foto_16.png)
+![Foto 17](Docker_ADP/foto_17.png)
+![Foto 18](Docker_ADP/foto_18.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
