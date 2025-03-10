@@ -43,6 +43,8 @@ El servicio de Docker se inicia automáticamente después de la instalación y s
 
 Con esto, Docker está correctamente instalado en Ubuntu.
 
+<h1>Instalación de Docker</h1>
+
 <h1>Actividad 2</h1>
 
 <h2>Pruebas iniciales con Docker</h2>
@@ -117,7 +119,7 @@ Ejecutamos el siguiente comando para construir la imagen a partir del Dockerfile
 
 Ejecución del contenedor
 
-sudo docker run -d -p 127.0.0.1:3000:3000 getting-started
+    sudo docker run -d -p 127.0.0.1:3000:3000 getting-started
 
 
 Podemos ver ejecutando el comando bien a y el contenedor que está funcionando en la dirección 127.0.0.1:3000:
@@ -132,18 +134,175 @@ Accederemos a la página docker.com y nos hacemos una cuenta:
 ![Foto 17](Docker_ADP/foto_17.png)
 ![Foto 18](Docker_ADP/foto_18.png)
 
+Nos logueamos con el comando docker login para iniciar sesión con nuestra cuenta desde la máduina virtual.
+
+![Foto 19](Docker_ADP/foto_19.png)
+
+Para publicar nuestro contenedor usaremos el comando docker tag con los siguientes parámetros para que el nombre de la subida sea aceptada en el registro público:
+
+    sudo docker tag getting-started varocode48/getting-started:v1
+    sudo docker push varocode48/getting-started:v1
+
+![Foto 20](Docker_ADP/foto_20.png)
+
+Tras esto se habra subido el contenedor.
+
+<h1>Actividad 3</h1>
+
+<h1>Descarga la imagen de ubuntu, hello-world y nginx</h1>
+
+Descargamos las imágenes ejecutando los siguientes comandos:
+
+    sudo docker pull ubuntu
+
+![Foto 21](Docker_ADP/foto_21.png)
+
+    sudo docker pull hello-world
+
+![Foto 22](Docker_ADP/foto_22.png)
+
+    sudo docker pull nginx
+
+![Foto 23](Docker_ADP/foto_23.png)
+
+Mostramos el listado las imágenes
+
+    docker images
+
+![Foto 24](Docker_ADP/foto_24.png)
+
+Ejecutamos un contenedor llamado hello-world y le damos el nombre “myhello1”, “myhello2” y “myhello3”
+
+    docker run --name myhello1 hello-world
+
+![Foto 25](Docker_ADP/foto_25.png)
+
+    docker run --name myhello2 hello-world
+
+![Foto 26](Docker_ADP/foto_26.png)
+
+    docker run --name myhello3 hello-world
+
+![Foto 27](Docker_ADP/foto_27.png)
+
+Mostramos los contenedores que estan funcionando
+
+    docker ps -a 
+
+![Foto 28](Docker_ADP/foto_28.png)
+
+Para detener el contenedor "myhello1”, "myhello2” lo detenerlo mediante el siguiente comando:
+
+    docker stop myhello1
+    
+    docker stop myhello2
+
+![Foto 29](Docker_ADP/foto_29.png)
+
+Borra el contenedor “myhello1”
+
+    docker rm myhello1
+    
+![Foto 30](Docker_ADP/foto_30.png)
+
+Para ver si se ha eliminado aplicamos el siguientes código para ver que se están ejecutando.
+
+    docker ps -a
+
+![Foto 31](Docker_ADP/foto_31.png)
+
+Borramos todos los contenedores:
+
+    docker rm $(docker ps -aq)
+
+![Foto 32](Docker_ADP/foto_32.png)
+
+Todos los contenedores han sido eliminados.
+
+<h1>Actividad 4</h1>
+
+<h2>Ejemplo 1: Despliegue de la aplicación Guestbook</h2>
+
+<h3>Seguiremos la siguiente ejemplo : https://github.com/josedom24/curso_docker_ies/blob/main/modulo3/guestbook.md de 
+josedom24</h3>
 
 
+Comenzamos la práctica creando una red docker
 
+    docker network create red_guestbook
 
+![Foto 33](Docker_ADP/foto_33.png)
 
+Usaremos Redis como base de datos,
 
+    docker run -d --name db --network my_network redis
 
+![Foto 34](Docker_ADP/foto_34.png)
 
+Como no tengo alguna imagen en Redis,se crea
 
+Creamos un nuevo directorio llamada guestbook
 
+Creamos un archivo llamado app.py
 
+    mkdir guestbook && cd guestbook
+    nano app.py
 
+![Foto 35](Docker_ADP/foto_35.png)
+
+También creamos un archivo Dockerfile con este contenido
+
+Por último, un archivo requirements.txt donde escribimos lo siguiente
+
+![Foto 36](Docker_ADP/foto_36.png)
+
+Construir la imagen para el frontend
+
+    docker build -t my_guestbook .
+
+![Foto 37](Docker_ADP/foto_37.png)
+
+Ejecutamos el contenedor
+
+    docker run -d –name -web --my_network -p 8080:5000 my_guestbook
+
+![Foto 38](Docker_ADP/foto_38.png)
+
+Accedemos a localhost:8080 para comprobar su funcionamiento
+
+![Foto 39](Docker_ADP/foto_39.png)
+
+<h2>Ejemplo 2: Despliegue de la aplicación Temperaturas</h2>
+
+    docker network create temperatura_app
+
+![Foto 40](Docker_ADP/foto_40.png)
+
+<h6>He tenido problemas y no tengo las imágenes</h6>
+
+Creammos un archivo llamado nubes.js para darle contenido a la aplicación
+
+Creamos un archivo Dockerfile y jason para las dependencias.
+
+Construimos el backend con:
+
+    docker built -t backend_temp
+    
+Creamos una carpeta llamada eltiempo
+
+    mkdir eltiempo
+    cd eltiempo
+    
+Y creamos el archivo app.py, el archivo requirements.txt y Dockerfile
+
+Construimos la imagen:
+
+    docker built -t climna
+    
+Ejecutamos el contenedor del frontend en nuestra red
+    
+    docker run -d --name eltiempo -p 8080:5000 climna
+ 
 
 
 
